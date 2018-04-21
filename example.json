@@ -1,0 +1,74 @@
+{
+    // url:https://g37simulator.webapp.163.com/get_hero_attr?callback=jQuery1113040929110230991317_1524293310676&heroid=200&awake=0&level=1&star=2&_=1524293310677
+    "data": {
+        "awakeitem": [
+            [
+                "水灵鲤·中级",
+                "pic_juexingcailiao_11",
+                16
+            ],
+            [
+                "水灵鲤·高级",
+                "pic_juexingcailiao_10",
+                8
+            ],
+            [
+                "天雷鼓·中级",
+                "pic_juexingcailiao_05",
+                16
+            ],
+            [
+                "天雷鼓·高级",
+                "pic_juexingcailiao_04",
+                8
+            ]
+        ],
+        "critPower": 0.5,       //暴击率
+        "bodyicon": "taohuayao", //拼写
+        "initTurnPos": 0.0, 
+        "debuffEnhance": 0.0,
+        "defense": 75.0,   //防御
+        "speed": 90.0,   //速度
+        "hurtReboundRate": 0.0,
+        "hurtAdditionRate": 0.0,
+        "headicon": "h_taohuayao",
+        "attack": 101.60000000000001,  //攻击力
+        "score": {
+            "dodge": 0,
+            "debuffReflect": 0,
+            "hurtAdditionRate": 0,
+            "critPower": 0,
+            "leechRate": 0,
+            "koGainHPRate": 0,
+            "critRate": 2,   
+            "initTurnPos": 0,
+            "revenge": 0,
+            "debuffEnhance": 0,
+            "cureStrenthRate": 0,
+            "koGainMP": 0,
+            "attack": 1,   //攻击成长率
+            "defense": 3,  // 防御成长率
+            "hurtReboundRate": 0,
+            "curedStrenthRate": 0,
+            "maxHp": 2,
+            "debuffResist": 0,
+            "speed": 0,
+            "hurtReductionRate": 0
+        },
+        "maxHp": 960.4,  //最大生命值
+        "debuffResist": 0.0, //
+        "dodge": 0.0,
+        "debuffReflect": 0,
+        "revenge": 0.0,
+        "curedStrenthRate": 0.0,
+        "icon": "pic_ss_taohuayao",
+        "leechRate": 0.0,
+        "koGainHPRate": 0.0,
+        "critRate": 0.05,
+        "cureStrenthRate": 0.0,
+        "koGainMP": 0,
+        "hurtReductionRate": 0.0
+    },
+    "success": true
+}
+// https://g37simulator.webapp.163.com/get_hero_skill?callback=jQuery1113040929110230991317_1524293310674&heroid=224&awake=1&level=0&star=2&_=1524293310675

@@ -14,33 +14,34 @@
                 <p class="title">式神属性</p>
                 <table>
                     <tr>
-                        <td colspan="2" style="padding-left:115px;">觉醒前</td>
+                        <td></td>
+                        <td >觉醒前</td>
                         <td>觉醒后</td>
                     
                     </tr>
                     <tr>
                         <td>攻击</td>
-                        <td>2</td>
+                        <td>{{awake.attack}}</td>
                         <td>3</td>
                     </tr>
                     <tr>
                         <td>生命</td>
-                        <td>5</td>
+                        <td>{{awake.maxHp}}</td>
                         <td>6</td>
                     </tr>
                     <tr>
                         <td>防御</td>
-                        <td>8</td>
+                        <td>{{awake.defense}}</td>
                         <td>9</td>
                     </tr>
                     <tr>
                         <td>速度</td>
-                        <td></td>
+                        <td>{{awake.speed}}</td>
                         <td></td>
                     </tr>
                     <tr>
                         <td>暴击</td>
-                        <td></td>
+                        <td>{{awake.critPower*10}}</td>
                         <td></td>
                     </tr>
                     <tr>
@@ -60,6 +61,22 @@
                     </tr>
                 </table>
             </li>
+            <li>
+                <p class="title">觉醒材料</p>
+                <table class="wakeitem">
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td v-for="item in awake.awakeitem" :key="item.id">
+                            {{item[0]}}*{{item[2]}}
+                        </td>
+                    </tr>
+                </table>
+            </li>    
             <li>
                 <p class="title">式神技能</p>
                 
@@ -86,18 +103,21 @@ export default {
     name: 'info',
     data() {
         return {
+            id:this.$route.params.id,
             story: [],
             skill:[],
             awake:{
+                awakeitem:[],
                 critPower: 0.0,
                 defense: 0,
                 speed: 0,
                 attack: 0,
                 maxHp: 0,
-            }
+            },   
         }
     },
     created: function(){
+        this.getAttr();
         let id = this.$route.params.id;
         console.log("info is created");
         this.$indicator.open('loading...');
@@ -130,6 +150,13 @@ export default {
                 // this.$set("ss",response.data.data)
                 this.$indicator.close();
             });
+        },
+        getAttr:function(){
+            this.$http.jsonp('https://g37simulator.webapp.163.com/get_hero_attr?heroid='+this.id+'&awake=0&level=2&star=2&_=1524293310677')
+            .then(function(response){
+                let temp = response.data.data;
+                this.awake = temp;
+            });
         }
     }
 }
@@ -151,5 +178,13 @@ li>p.title {
     background-color: gray;
     border: none;
     color: white;
+    text-indent: 1em;
 }
+td{
+    text-align: center;
+    width: 5%;
+}
+/* table.wakeitem{
+    font-size: 6px;
+} */
 </style>
