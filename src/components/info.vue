@@ -21,28 +21,28 @@
                     </tr>
                     <tr>
                         <td>攻击</td>
-                        <td>{{awake.attack}}</td>
-                        <td>3</td>
+                        <td>{{beforewake.attack}}</td>
+                        <td>{{afterwake.attack}}</td>
                     </tr>
                     <tr>
                         <td>生命</td>
-                        <td>{{awake.maxHp}}</td>
-                        <td>6</td>
+                        <td>{{beforewake.maxHp}}</td>
+                        <td>{{afterwake.maxHp}}</td>
                     </tr>
                     <tr>
                         <td>防御</td>
-                        <td>{{awake.defense}}</td>
-                        <td>9</td>
+                        <td>{{beforewake.defense}}</td>
+                        <td>{{afterwake.defense}}</td>
                     </tr>
                     <tr>
                         <td>速度</td>
-                        <td>{{awake.speed}}</td>
-                        <td></td>
+                        <td>{{beforewake.speed}}</td>
+                        <td>{{afterwake.speed}}</td>
                     </tr>
                     <tr>
                         <td>暴击</td>
-                        <td>{{awake.critPower*10}}</td>
-                        <td></td>
+                        <td>{{beforewake.critPower*10}}</td>
+                        <td>{{afterwake.critPower*10}}</td>
                     </tr>
                     <tr>
                         <td>暴击伤害</td>
@@ -71,7 +71,7 @@
                         <td></td>
                     </tr>
                     <tr>
-                        <td v-for="item in awake.awakeitem" :key="item.id">
+                        <td v-for="item in beforewake.awakeitem" :key="item.id">
                             {{item[0]}}*{{item[2]}}
                         </td>
                     </tr>
@@ -106,18 +106,20 @@ export default {
             id:this.$route.params.id,
             story: [],
             skill:[],
-            awake:{
+            beforewake:{
                 awakeitem:[],
                 critPower: 0.0,
                 defense: 0,
                 speed: 0,
                 attack: 0,
                 maxHp: 0,
-            },   
+            }, 
+            afterwake:{}  
         }
     },
     created: function(){
-        this.getAttr();
+        this.getAfterAttr();
+        this.getBeforeAttr();
         let id = this.$route.params.id;
         console.log("info is created");
         this.$indicator.open('loading...');
@@ -151,12 +153,20 @@ export default {
                 this.$indicator.close();
             });
         },
-        getAttr:function(){
+        getBeforeAttr:function(){
             this.$http.jsonp('https://g37simulator.webapp.163.com/get_hero_attr?heroid='+this.id+'&awake=0&level=2&star=2&_=1524293310677')
             .then(function(response){
                 let temp = response.data.data;
-                this.awake = temp;
+                this.beforewake = temp;
             });
+        },
+        getAfterAttr:function(){
+            this.$http.jsonp('https://g37simulator.webapp.163.com/get_hero_attr?heroid='+this.id+'&awake=1&level=2&star=2&_=1524293310677')
+            .then(function(response){
+                let temp = response.data.data;
+                this.afterwake = temp;
+            });
+
         }
     }
 }

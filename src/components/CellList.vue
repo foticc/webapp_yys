@@ -2,7 +2,7 @@
     <div>
         <mt-cell v-for="(n,key) in ss" :key="n.id" :title="n.name" is-link :to="'/info/'+key">
            
-            <img v-bind:src="imgurl" height="50" width="50" />
+            <img v-bind:src="imgurl+key+'.png'" height="50" width="50" />
         </mt-cell>
     </div>
 </template>
@@ -13,14 +13,15 @@ export default {
     name: 'CellList',
     data() {
         return {
+
             ss: [],
             imgurl: ''
         }
     },
     props: ['selected'],
     created:function(){
-        // this.imgurl = 'http://yys.res.netease.com/pc/zt/20161108171335/data/shishen_big_beforeAwake/200.png';
-        this.imgurl = 'https://img1.doubanio.com/view/photo/l/public/p2504903297.jpg';
+        // this.imgurl = 'https://yys.res.netease.com/pc/zt/20161108171335/data/shishen/302.png';
+        this.imgurl = 'https://yys.res.netease.com/pc/zt/20161108171335/data/shishen/';
         this.getData();
     },
     methods: {
