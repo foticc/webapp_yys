@@ -42,7 +42,7 @@
                     <tr>
                         <td>暴击</td>
                         <td>{{beforewake.critPower*10}}</td>
-                        <td>{{afterwake.critPower*10}}</td>
+                        <td>{{afterwake.critPower==null?'':afterwake.critPower*10}}</td>
                     </tr>
                     <tr>
                         <td>暴击伤害</td>
