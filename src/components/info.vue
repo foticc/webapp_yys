@@ -93,7 +93,32 @@
                 
             </li>
         </ul>
-           
+        <p v-if="wakeadd.add_type == '3'">
+            {{wakeadd.add}} 
+        </p>
+        <p v-else-if="wakeadd.add_type == '2'">
+             <p1 v-for="(ski,id) in wakeadd" :key="id">
+                <img :src="'https://yys.res.netease.com/pc/zt/20161108171335/data/skill/'+id+'.png'"/>
+                {{ski.name}}<br/>
+                {{ski.normaldesc}}<br/>
+                <a v-for="a of ski.desc" :key="a.id">
+                    <p>{{a}}</p>
+                </a>
+            </p1>
+             {{wakeadd}} 
+        </p>
+        <p v-else-if="wakeadd.add_type == '1'">
+            <p1 v-for="(ski,id) in wakeadd" :key="id">
+                <img :src="'https://yys.res.netease.com/pc/zt/20161108171335/data/skill/'+id+'.png'"/>
+                {{ski.name}}<br/>
+                {{ski.normaldesc}}<br/>
+                <a v-for="a of ski.desc" :key="a.id">
+                    <p>{{a}}</p>
+                </a>
+            </p1>
+            {{wakeadd}} 
+        </p>
+          
     </div>
 </div>  
 </template>
@@ -114,12 +139,14 @@ export default {
                 attack: 0,
                 maxHp: 0,
             }, 
-            afterwake:{}  
+            afterwake: {},
+            wakeadd: {}  
         }
     },
     created: function(){
         this.getAfterAttr();
         this.getBeforeAttr();
+        this.getWakeAdd();
         let id = this.$route.params.id;
         console.log("info is created");
         this.$indicator.open('loading...');
@@ -166,7 +193,13 @@ export default {
                 let temp = response.data.data;
                 this.afterwake = temp;
             });
-
+        },
+        getWakeAdd: function(){
+             this.$http.jsonp('https://g37simulator.webapp.163.com/get_hero_skill?heroid='+this.id+'&awake=1&level=0&star=2&_=1524293310677')
+            .then(function(response){
+                let temp = response.data.data;
+                this.wakeadd = temp;
+            });
         }
     }
 }
