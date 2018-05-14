@@ -5,7 +5,9 @@
     </mt-header>
     <mt-tab-container v-model="selected">
       <mt-tab-container-item id="test1">
-        <CellList></CellList>
+        <div>
+          <CellList></CellList>
+        </div>
       </mt-tab-container-item>
       <mt-tab-container-item id="test2">
 
