@@ -1,8 +1,8 @@
 <template>
   <div>
-    <mt-header fixed title="固定在顶部">
-      
-    </mt-header>
+    <div class="header">
+       <mt-header fixed title="固定在顶部"></mt-header>
+    </div>
     <mt-tab-container v-model="selected">
       <mt-tab-container-item id="test1">
         <div>

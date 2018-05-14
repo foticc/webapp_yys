@@ -7,28 +7,39 @@
     
     <div>  
     <div class="nav">  
-      <mt-button size="small" @click.native.prevent="active = 'tab-container1'">SSR</mt-button>  
-      <mt-button size="small" @click.native.prevent="active = 'tab-container2'">SR</mt-button>  
-      <mt-button size="small" @click.native.prevent="active = 'tab-container3'">R</mt-button>
-      <mt-button size="small" @click.native.prevent="active = 'tab-container3'">N</mt-button> 
-      <mt-button size="small" @click.native.prevent="active = 'tab-container3'">呱</mt-button>  
+      <mt-button size="small" @click.native.prevent="active  = 'ssr'">SSR</mt-button>  
+      <mt-button size="small" @click.native.prevent="active  = 'sr'">SR</mt-button>  
+      <mt-button size="small" @click.native.prevent="active  = 'r'">R</mt-button>
+      <mt-button size="small" @click.native.prevent="active  = 'n'">N</mt-button>  
     </div>  
-    <div class="page-tab-container">  
-      <mt-tab-container class="page-tabbar-tab-container" v-model="active" swipeable>  
-        <mt-tab-container-item id="tab-container1">  
-          <mt-cell v-for="(n,key) in ss" :key="n.id" :title="n.name" is-link :to="'/info/'+key">
-            <img v-bind:src="imgurl+key+'.png'" height="50" width="50" />
-            </mt-cell>
-        </mt-tab-container-item>  
-        <mt-tab-container-item id="tab-container2">  
-           
-        </mt-tab-container-item>  
-        <mt-tab-container-item id="tab-container3">  
-            
-          3213123
-        </mt-tab-container-item>  
-      </mt-tab-container>  
-    </div>  
+   
+
+    <div class="page-tab-container">
+        <mt-tab-container class="page-tabbar-tab-container" v-model="active" swipeable>
+            <mt-tab-container-item id="ssr">
+                <mt-cell v-for="(n,key) in ss" :key="n.id" :title="n.name" is-link :to="'/info/'+key">
+                    <img v-bind:src="imgurl+key+'.png'" height="50" width="50" />
+                </mt-cell>
+            </mt-tab-container-item>
+            <mt-tab-container-item id="sr">
+                <mt-cell v-for="(n,key) in ss" :key="n.id" :title="n.name" is-link :to="'/info/'+key">
+                    <img v-bind:src="imgurl+key+'.png'" height="50" width="50" />
+                </mt-cell>
+            </mt-tab-container-item>
+            <mt-tab-container-item id="r">
+                <mt-cell v-for="(n,key) in ss" :key="n.id" :title="n.name" is-link :to="'/info/'+key">
+                    <img v-bind:src="imgurl+key+'.png'" height="50" width="50" />
+                </mt-cell>
+            </mt-tab-container-item>
+            <mt-tab-container-item id="n">
+                <mt-cell v-for="(n,key) in ss" :key="n.id" :title="n.name" is-link :to="'/info/'+key">
+                    <img v-bind:src="imgurl+key+'.png'" height="50" width="50" />
+                </mt-cell>
+            </mt-tab-container-item>
+        </mt-tab-container>
+    </div>
+
+
   </div>  
 </template>
 
@@ -38,7 +49,8 @@ export default {
     name: 'CellList',
     data() {
         return {
-            active: "SSR",
+            active: "4",
+            type: '',
             ss: [],
             imgurl: ''
         }
@@ -47,12 +59,12 @@ export default {
     created:function(){
         // this.imgurl = 'https://yys.res.netease.com/pc/zt/20161108171335/data/shishen/302.png'; ssr -4
         this.imgurl = 'https://yys.res.netease.com/pc/zt/20161108171335/data/shishen/';
-        this.getData();
+        
     },
     methods: {
         getData: function() {
             this.$indicator.open('loading...');
-            this.$http.jsonp('https://g37simulator.webapp.163.com/get_heroid_list?rarity=0&page=1&per_page=200')
+            this.$http.jsonp('https://g37simulator.webapp.163.com/get_heroid_list?rarity='+this.type+'&page=1&per_page=200')
             .then(function(response) {
                 console.log(response.data.data);
                 this.ss = response.data.data;
