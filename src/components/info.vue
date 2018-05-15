@@ -1,6 +1,11 @@
 <template>
    <div>
     <div>
+        <mt-header icon="back" fixed slot="left" title="">
+            <i class="mintui-back"></i>
+        </mt-header>
+    </div>
+    <div>
         <!-- <img src="https://yys.res.netease.com/pc/zt/20161108171335/data/shishen_big_beforeAwake/200.png" width="25%" height="25%"> -->
     </div>
     <div>

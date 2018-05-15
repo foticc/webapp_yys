@@ -16,11 +16,11 @@
 
     <div class="page-tab-container">
         <mt-tab-container class="page-tabbar-tab-container" v-model="active" swipeable>
-            <mt-tab-container-item id="ssr">
-                <mt-cell v-for="(n,key) in ss" :key="n.id" :title="n.name" is-link :to="'/info/'+key">
-                    <img v-bind:src="imgurl+key+'.png'" height="50" width="50" />
-                </mt-cell>
-            </mt-tab-container-item>
+                <mt-tab-container-item id="ssr">
+                        <mt-cell v-for="(n,key) in ss" :key="n.id" :title="n.name" is-link :to="'/info/'+key">
+                            <img v-bind:src="imgurl+key+'.png'" height="50" width="50" />
+                        </mt-cell>
+                </mt-tab-container-item>
             <mt-tab-container-item id="sr">
                 <mt-cell v-for="(n,key) in ss" :key="n.id" :title="n.name" is-link :to="'/info/'+key">
                     <img v-bind:src="imgurl+key+'.png'" height="50" width="50" />
@@ -49,8 +49,7 @@ export default {
     name: 'CellList',
     data() {
         return {
-            active: "4",
-            type: '',
+            active: "ssr",
             ss: [],
             imgurl: ''
         }
@@ -59,12 +58,35 @@ export default {
     created:function(){
         // this.imgurl = 'https://yys.res.netease.com/pc/zt/20161108171335/data/shishen/302.png'; ssr -4
         this.imgurl = 'https://yys.res.netease.com/pc/zt/20161108171335/data/shishen/';
-        
+        this.getData("4");
+    },
+    watch:{
+        active: function(){
+            let retype;
+            console.log("~~~~"+this.active);
+            switch (this.active) {
+                case "ssr":
+                    retype = "4";
+                    break;
+                case "sr":
+                    retype = "3";
+                    break;
+                case "r":
+                    retype = "2";
+                    break;
+                case "n":
+                    retype = "1";
+                    break;
+                default:
+                    break;
+            }
+            // this.getData(retype);
+        }
     },
     methods: {
-        getData: function() {
+        getData: function(type) {
             this.$indicator.open('loading...');
-            this.$http.jsonp('https://g37simulator.webapp.163.com/get_heroid_list?rarity='+this.type+'&page=1&per_page=200')
+            this.$http.jsonp('https://g37simulator.webapp.163.com/get_heroid_list?rarity='+type+'&page=1&per_page=200')
             .then(function(response) {
                 console.log(response.data.data);
                 this.ss = response.data.data;
@@ -84,8 +106,9 @@ export default {
 
 }
 .nav > button{
-    width: 20%;
+    width: 25%;
     float:left;
+    border: none;
 }
 .page-tab-container{
     clear: both;
