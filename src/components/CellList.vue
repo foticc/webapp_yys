@@ -16,23 +16,23 @@
 
     <div class="page-tab-container">
         <mt-tab-container class="page-tabbar-tab-container" v-model="active" swipeable>
-                <mt-tab-container-item id="ssr">
-                        <mt-cell v-for="(n,key) in ss" :key="n.id" :title="n.name" is-link :to="'/info/'+key">
-                            <img v-bind:src="imgurl+key+'.png'" height="50" width="50" />
-                        </mt-cell>
-                </mt-tab-container-item>
+            <mt-tab-container-item id="ssr">
+                    <mt-cell v-for="(n,key) in ssr" :key="n.id" :title="n.name" is-link :to="'/info/'+key">
+                        <img v-bind:src="imgurl+key+'.png'" height="50" width="50" />
+                    </mt-cell>
+            </mt-tab-container-item>
             <mt-tab-container-item id="sr">
-                <mt-cell v-for="(n,key) in ss" :key="n.id" :title="n.name" is-link :to="'/info/'+key">
+                <mt-cell v-for="(n,key) in sr" :key="n.id" :title="n.name" is-link :to="'/info/'+key">
                     <img v-bind:src="imgurl+key+'.png'" height="50" width="50" />
                 </mt-cell>
             </mt-tab-container-item>
             <mt-tab-container-item id="r">
-                <mt-cell v-for="(n,key) in ss" :key="n.id" :title="n.name" is-link :to="'/info/'+key">
+                <mt-cell v-for="(n,key) in r" :key="n.id" :title="n.name" is-link :to="'/info/'+key">
                     <img v-bind:src="imgurl+key+'.png'" height="50" width="50" />
                 </mt-cell>
             </mt-tab-container-item>
             <mt-tab-container-item id="n">
-                <mt-cell v-for="(n,key) in ss" :key="n.id" :title="n.name" is-link :to="'/info/'+key">
+                <mt-cell v-for="(n,key) in n" :key="n.id" :title="n.name" is-link :to="'/info/'+key">
                     <img v-bind:src="imgurl+key+'.png'" height="50" width="50" />
                 </mt-cell>
             </mt-tab-container-item>
@@ -50,7 +50,10 @@ export default {
     data() {
         return {
             active: "ssr",
-            ss: [],
+            ssr:[],
+            sr: [],
+            r: [],
+            n: [],
             imgurl: ''
         }
     },
@@ -59,11 +62,13 @@ export default {
         // this.imgurl = 'https://yys.res.netease.com/pc/zt/20161108171335/data/shishen/302.png'; ssr -4
         this.imgurl = 'https://yys.res.netease.com/pc/zt/20161108171335/data/shishen/';
         this.getData("4");
+        this.getData("3");
+        this.getData("2");
+        this.getData("1");
     },
     watch:{
         active: function(){
             let retype;
-            console.log("~~~~"+this.active);
             switch (this.active) {
                 case "ssr":
                     retype = "4";
@@ -80,7 +85,6 @@ export default {
                 default:
                     break;
             }
-            // this.getData(retype);
         }
     },
     methods: {
@@ -89,8 +93,16 @@ export default {
             this.$http.jsonp('https://g37simulator.webapp.163.com/get_heroid_list?rarity='+type+'&page=1&per_page=200')
             .then(function(response) {
                 console.log(response.data.data);
-                this.ss = response.data.data;
-                // this.$set("ss",response.data.data)
+                let ss = response.data.data;
+                if("4"===type){
+                    this.ssr = ss;
+                }else if("3"===type){
+                    this.sr = ss;
+                }else if("2"===type){
+                    this.r = ss;
+                }else if("1"===type){
+                    this.n = ss;
+                }
                 this.$indicator.close();
             },function(response){
                 this.$indicator.close();

@@ -11,6 +11,8 @@ Vue.config.productionTip = false
 Vue.use(MintUI)
 Vue.use(VueResource)
 
+
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
