@@ -12,7 +12,7 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      component: InfoDebug
+      component: Home
     },
     {
       path: '/info/:id',
