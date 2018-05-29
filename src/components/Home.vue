@@ -10,7 +10,7 @@
         </div>
       </mt-tab-container-item>
       <mt-tab-container-item id="test2">
-
+        <InfoDebug></InfoDebug>
       </mt-tab-container-item>
       <mt-tab-container-item id="test3">
 
@@ -32,9 +32,10 @@
 
 <script>
 import CellList from './CellList.vue'
+import InfoDebug from './InfoDebug.vue'
 export default {
   name: 'Home',
-  components: { CellList },
+  components: { CellList,InfoDebug },
   data() {
     return {
       selected: 'test1'
